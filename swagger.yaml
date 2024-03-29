@@ -1,0 +1,161 @@
+openapi: 3.0.3
+info:
+  title: 06-jobs-api
+  version: 1.0.0
+  contact: {}
+servers:
+- url: 'http://localhost:5000/api/v1'
+paths:
+  /auth/register/:
+    post:
+      summary: register
+      description: register
+      operationId: register
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: john127578@gmail.com
+                name:
+                  type: string
+                  example: john
+                password:
+                  type: string
+                  example: secret12
+            examples:
+              register:
+                value:
+                  email: john127578@gmail.com
+                  name: john
+                  password: secret12
+      responses:
+        '200':
+          description: ''
+  /auth/login:
+    post:
+      summary: login
+      description: login
+      operationId: login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: mike127578@gmail.com
+                password:
+                  type: string
+                  example: secret12
+                username:
+                  type: string
+                  example: mike
+            examples:
+              login:
+                value:
+                  email: mike127578@gmail.com
+                  password: secret12
+                  username: mike
+      responses:
+        '200':
+          description: ''
+  /jobs/:
+    get:
+      summary: get all jobs
+      description: get all jobs
+      operationId: getAllJobs
+      responses:
+        '200':
+          description: ''
+      security:
+      - bearerAuth: []
+    post:
+      summary: create a job
+      description: create a job
+      operationId: createAJob
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                company:
+                  type: string
+                  example: YAHOO
+                position:
+                  type: string
+                  example: frontend developer
+            examples:
+              create a job:
+                value:
+                  company: YAHOO
+                  position: frontend developer
+      responses:
+        '200':
+          description: ''
+      security:
+      - bearerAuth: []
+  /jobs/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+        description: The user ID
+    get:
+      summary: get a jobs
+      description: get a jobs
+      operationId: getAJobs
+      responses:
+        '200':
+          description: ''
+      security:
+      - bearerAuth: []
+    delete:
+      summary: delete job
+      description: delete job
+      operationId: deleteJob
+      responses:
+        '200':
+          description: ''
+      security:
+      - bearerAuth: []
+    patch:
+      summary: update job
+      description: update job
+      operationId: updateJob
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                company:
+                  type: string
+                  example: X
+                position:
+                  type: string
+                  example: fullstack developer
+            examples:
+              update job:
+                value:
+                  company: X
+                  position: fullstack developer
+      responses:
+        '200':
+          description: ''
+      security:
+      - bearerAuth: []
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+tags: []
+
